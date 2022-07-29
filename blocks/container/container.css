@@ -67,13 +67,12 @@
   line-height: 1.2;
 }
 
-.container__task {
-  display: inline-block;
-  margin: 0;
-}
+
 
 .container__item {
   padding: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .container__box {
@@ -109,3 +108,5 @@
   padding: 10px;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
+
+

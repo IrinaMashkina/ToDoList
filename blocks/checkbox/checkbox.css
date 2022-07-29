@@ -1,0 +1,58 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+/* скрытый чекбокс*/
+
+
+.checkbox__input_invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0); /*скрытие браузерного чекбокса */
+}
+
+.checkbox__input_disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* видимый чекбокс */
+.checkbox__input_visible {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #ebebeb;
+  margin-right: 14px;
+  transition: background-color ease-in-out 0.2s;
+}
+
+.checkbox__task {
+  display: inline-block;
+  margin: 0;
+}
+
+/* состояния видимого чекбокса */
+
+/* checked */
+.checkbox__input_invisible:checked + .checkbox__input_visible {
+}
+
+.checkbox__input_invisible:checked + .checkbox__input_visible::before {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  content: "\2714";
+  font-size: 22px;
+  color: #1b4d75;
+  border-radius: 50%;
+}
+
+.checkbox__input_invisible:checked ~ .checkbox__task {
+  color: rgb(146, 146, 146);
+  text-decoration-line:line-through;
+}
