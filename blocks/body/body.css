@@ -1,0 +1,10 @@
+.body {
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0e2333;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

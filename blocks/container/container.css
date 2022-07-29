@@ -1,51 +1,111 @@
 .container {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background-color: rgb(222, 222, 222);
-  max-width: 800px;
+  max-width: 700px;
   width: 100%;
   margin: auto;
   border-radius: 30px;
-  padding: 60px;
+  padding: 40px;
   box-shadow: 10px 15px 20px 5px rgba(0, 0, 0, 0.5);
 }
 
 .container__title {
   margin: 0;
-  font-size: 120px;
+  font-size: 100px;
   line-height: 1.2;
   text-align: center;
   color: #1b4d75;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .container__form {
   box-sizing: border-box;
-  padding: 40px;
+  padding: 30px;
   border-radius: 30px;
   background-color: #ffffff;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .container__input {
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 40px;
+  line-height: 1.2;
+  display: block;
   width: 100%;
-  position: relative;
-  padding: 20px;
-}
-
-.container__input::after {
-  content: "&#8744;";
-  position: absolute;
-  top: 0;
-  left: 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+  color: rgb(108, 108, 108);
+  margin-bottom: 50px;
+  margin-top: 10px;
 }
 
 .container__input::placeholder {
-  color: grey;
-  font-family: "Courier New", Courier, monospace;
+  color: rgb(128, 128, 128);
+  font-family: inherit;
   font-size: 40px;
   line-height: 1.2;
+}
+
+.container__input:focus {
+  outline: none;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
+  padding: 10px 23px;
+}
+
+.container__input:focus::placeholder {
+  color: rgb(188, 188, 188);
 }
 
 .container__list {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.container__task {
+  display: inline-block;
+  margin: 0;
+}
+
+.container__item {
+  padding: 20px;
+}
+
+.container__box {
+  font-size: 20px;
+  line-height: 1.2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.container__counter-text {
+  margin: 10px;
+}
+
+.container__filter-buttons-box {
+  display: flex;
+  column-gap: 15px;
+}
+
+.container__filter-button {
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.container__filter-button_active {
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.container__clear-button {
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }

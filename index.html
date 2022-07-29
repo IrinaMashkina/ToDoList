@@ -7,41 +7,51 @@
     <title>Todos</title>
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
-  <body>
-    <div class="page">
-      <div class="container">
-        <h1 class="container__title">todos</h1>
-        <form class="container__form">
-          <input type="text" class="container__input" placeholder="What needs to be done?" value=""/>
-          <ul class="container__list">
-            <li class="container__item">
-              <input type="checkbox" class="container__checkbox" />
-              <p class="container__task">Тестовое задание</p>
-            </li>
-            <li class="container__item">
-              <input type="checkbox" class="container__checkbox" />
-              <p class="container__task">Прекрасный код</p>
-            </li>
-            <li class="container__item">
-              <input type="checkbox" class="container__checkbox" />
-              <p class="container__task">Покрытие тестами</p>
-            </li>
-          </ul>
-          <div class="container__box">
-            <p class="container__counter-text">2 items left</p>
-            <div class="container__filter-buttons-box">
-              <button type="button" 
-                class="container__filter-button container__filter-button_active"
-              >
-                All
-              </button>
-              <button  type="button" class="container__filter-button">Active</button>
-              <button  type="button" class="container__filter-button">Completed</button>
-            </div>
-            <button  type="button" class="container__clear-button">Clear completed</button>
+  <body class="body">
+    <div class="container">
+      <h1 class="container__title">todos</h1>
+      <form class="container__form">
+        <input
+          type="text"
+          class="container__input"
+          placeholder="What needs to be done?"
+          value=""
+        />
+        <ul class="container__list">
+          <li class="container__item">
+            <input type="checkbox" class="container__checkbox" />
+            <p class="container__task">Тестовое задание</p>
+          </li>
+          <li class="container__item">
+            <input type="checkbox" class="container__checkbox" />
+            <p class="container__task">Прекрасный код</p>
+          </li>
+          <li class="container__item">
+            <input type="checkbox" class="container__checkbox" />
+            <p class="container__task">Покрытие тестами</p>
+          </li>
+        </ul>
+        <div class="container__box">
+          <p class="container__counter-text">2 items left</p>
+          <div class="container__filter-buttons-box">
+            <button
+              type="button"
+              class="button container__filter-button container__filter-button_active"
+            >
+              All
+            </button>
+            <button type="button" class="button container__filter-button">
+              Active
+            </button>
+            <button type="button" class="button container__filter-button">
+              Completed
+            </button>
           </div>
-        </form>
-      </div>
+          <button type="button" class="button container__clear-button">
+            Clear completed
+          </button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
