@@ -17,13 +17,28 @@
           placeholder="What needs to be done?"
           value=""
         />
-        <ul class="container__list">
+        <ul class="container__list ">
+          <template id="task">
+            <li class="container__item">
+              <label class="checkbox" for="">
+                <input
+                  type="checkbox"
+                  class="checkbox__input checkbox__input_invisible checkbox__input_disabled"
+                  id=""
+                />
+                <span
+                  class="checkbox__input checkbox__input_visible checkbox__input_disabled"
+                ></span>
+                <p class="checkbox__task">Тестовое задание</p>
+              </label>
+            </li>
+          </template>
           <li class="container__item">
-            <label class="checkbox" for="checkbox__input1">
+            <label class="checkbox" for="input-1">
               <input
                 type="checkbox"
                 class="checkbox__input checkbox__input_invisible checkbox__input_disabled"
-                id="checkbox__input1"
+                id="input-1"
               />
               <span
                 class="checkbox__input checkbox__input_visible checkbox__input_disabled"
@@ -32,11 +47,11 @@
             </label>
           </li>
           <li class="container__item">
-            <label class="checkbox" for="checkbox__input2">
+            <label class="checkbox" for="input-2">
               <input
                 type="checkbox"
                 class="checkbox__input checkbox__input_invisible checkbox__input_disabled"
-                id="checkbox__input2"
+                id="input-2"
               />
               <span
                 class="checkbox__input checkbox__input_visible checkbox__input_disabled"
@@ -45,11 +60,11 @@
             </label>
           </li>
           <li class="container__item">
-            <label class="checkbox" for="checkbox__input3">
+            <label class="checkbox" for="input-3">
               <input
                 type="checkbox"
                 class="checkbox__input checkbox__input_invisible checkbox__input_disabled"
-                id="checkbox__input3"
+                id="input-3"
               />
               <span
                 class="checkbox__input checkbox__input_visible checkbox__input_disabled"
@@ -63,14 +78,14 @@
           <div class="container__filter-buttons-box">
             <button
               type="button"
-              class="button container__filter-button container__filter-button_active"
+              class="button container__filter-button container__filter-button_active container__filter-button_type_all "
             >
               All
             </button>
-            <button type="button" class="button container__filter-button">
+            <button type="button" class="button container__filter-button container__filter-button_type_active">
               Active
             </button>
-            <button type="button" class="button container__filter-button">
+            <button type="button" class="button container__filter-button container__filter-button_type_completed">
               Completed
             </button>
           </div>
@@ -80,5 +95,6 @@
         </div>
       </form>
     </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
