@@ -3,10 +3,12 @@
   background-color: rgb(222, 222, 222);
   max-width: 700px;
   width: 100%;
+
   margin: auto;
   border-radius: 30px;
   padding: 40px;
   box-shadow: 10px 15px 20px 5px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 .container__title {
@@ -19,6 +21,10 @@
 }
 
 .container__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 600px;
   box-sizing: border-box;
   padding: 30px;
   border-radius: 30px;
@@ -41,6 +47,7 @@
   margin-bottom: 50px;
   margin-top: 10px;
 }
+
 
 .container__input::placeholder {
   color: rgb(128, 128, 128);
@@ -109,4 +116,35 @@
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
+.container__invisible-text {
+  display: none;
+}
 
+
+@media screen and (max-width: 768px) {
+  .container__input {
+    font-size: 24px;
+  }
+  .container__input::placeholder {
+    font-size: 24px;
+
+  }
+  .container__list {
+        font-size: 18px;
+    
+  }
+
+
+  .container__filter-buttons-box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+
+.container__invisible-text {
+  display: none;
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+}
