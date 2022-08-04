@@ -69,6 +69,7 @@ function toggleFilter(btn) {
   activeBtn.classList.remove("container__filter-button_active");
   btn.classList.add("container__filter-button_active");
 }
+<<<<<<< HEAD
 
 function filterActivedTasks() {
   toggleFilter(activeFilterBtn);
@@ -87,6 +88,29 @@ function filterCompletedTasks() {
   for (let i = 0; i < allCkeckboxes.length; i++) {
     allCkeckboxes[i].closest(".container__item").style.display = "flex";
     if (!allCkeckboxes[i].checked) {
+=======
+
+function filterActivedTasks() {
+  toggleFilter(activeFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    if (allCkeckboxes[i].checked) {
+>>>>>>> 4bdab28cda5eaf60cf5cb3ae5d437d2b55bf4b89
+      allCkeckboxes[i].closest(".container__item").style.display = "none";
+    }
+  }
+}
+
+<<<<<<< HEAD
+function filterAllTasks() {
+  toggleFilter(allFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+=======
+function filterCompletedTasks() {
+  toggleFilter(completedFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    if (!allCkeckboxes[i].checked) {
       allCkeckboxes[i].closest(".container__item").style.display = "none";
     }
   }
@@ -95,6 +119,8 @@ function filterCompletedTasks() {
 function filterAllTasks() {
   toggleFilter(allFilterBtn);
   const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+
+>>>>>>> 4bdab28cda5eaf60cf5cb3ae5d437d2b55bf4b89
   for (let i = 0; i < allCkeckboxes.length; i++) {
     allCkeckboxes[i].closest(".container__item").style.display = "flex";
   }
