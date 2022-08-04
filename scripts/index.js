@@ -35,17 +35,6 @@ function checkId(id, label, input) {
   });
 }
 
-// function toggleCheckbox(inp) {
-//     console.log(inp);
-//   if (!inp.checkbox) {
-//     inp.setAttribute("checked", true);
-//     console.log(inp)
-//   } else {
-//     inp.removeAttribute("checked", true);
-//     console.log(inp)
-//   }
-// }
-
 function generateId() {
   const id = Math.floor(Math.random() * 1000000);
   return id;
@@ -59,9 +48,9 @@ function addNewTask(e) {
   const input = newTask.querySelector(".checkbox__input_invisible");
   checkId(generateId(), label, input);
   text.textContent = addTaskInput.value;
-
   taskList.append(newTask);
   addTaskInput.value = "";
+  setCount();
 }
 
 function toggleFilter(btn) {
@@ -100,8 +89,25 @@ function filterAllTasks() {
   }
 }
 
+function getCount() {
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  let counter = 0;
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    allCkeckboxes[i].checked ? counter : (counter += 1);
+  }
+  return counter;
+}
+
+function setCount() {
+  const counterText = document.querySelector(".container__counter-text");
+  counterText.textContent = `${getCount()} items left`;
+}
+
+setCount();
+
 clearBtn.addEventListener("click", clearCompleted);
 form.addEventListener("submit", addNewTask);
 activeFilterBtn.addEventListener("click", filterActivedTasks);
 completedFilterBtn.addEventListener("click", filterCompletedTasks);
 allFilterBtn.addEventListener("click", filterAllTasks);
+taskList.addEventListener("change", setCount);
