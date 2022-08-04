@@ -56,3 +56,7 @@
   color: rgb(146, 146, 146);
   text-decoration-line:line-through;
 }
+
+.none {
+  display: none;
+}

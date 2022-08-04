@@ -3,6 +3,7 @@ const form = document.querySelector(".container__form");
 const addTaskInput = document.querySelector(".container__input");
 const taskList = document.querySelector(".container__list");
 const task = document.querySelector("#task").content.cloneNode(true);
+const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
 const allFilterBtn = document.querySelector(
   ".container__filter-button_type_all"
 );
@@ -14,7 +15,7 @@ const completedFilterBtn = document.querySelector(
 );
 
 function clearCompleted() {
-  const allCkeckboxes = document.querySelectorAll(".checkbox__input");
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
 
   for (let i = 0; i < allCkeckboxes.length; i++) {
     if (allCkeckboxes[i].checked) {
@@ -34,6 +35,17 @@ function checkId(id, label, input) {
   });
 }
 
+// function toggleCheckbox(inp) {
+//     console.log(inp);
+//   if (!inp.checkbox) {
+//     inp.setAttribute("checked", true);
+//     console.log(inp)
+//   } else {
+//     inp.removeAttribute("checked", true);
+//     console.log(inp)
+//   }
+// }
+
 function generateId() {
   const id = Math.floor(Math.random() * 1000000);
   return id;
@@ -47,15 +59,46 @@ function addNewTask(e) {
   const input = newTask.querySelector(".checkbox__input_invisible");
   checkId(generateId(), label, input);
   text.textContent = addTaskInput.value;
+
   taskList.append(newTask);
   addTaskInput.value = "";
 }
 
-function filterActivedTasks() {}
+function toggleFilter(btn) {
+  let activeBtn = document.querySelector(".container__filter-button_active");
+  activeBtn.classList.remove("container__filter-button_active");
+  btn.classList.add("container__filter-button_active");
+}
 
-function filterCompletedTasks() {}
+function filterActivedTasks() {
+  toggleFilter(activeFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    allCkeckboxes[i].closest(".container__item").style.display = "flex";
+    if (allCkeckboxes[i].checked) {
+      allCkeckboxes[i].closest(".container__item").style.display = "none";
+    }
+  }
+}
 
-function filterAllTasks() {}
+function filterCompletedTasks() {
+  toggleFilter(completedFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    allCkeckboxes[i].closest(".container__item").style.display = "flex";
+    if (!allCkeckboxes[i].checked) {
+      allCkeckboxes[i].closest(".container__item").style.display = "none";
+    }
+  }
+}
+
+function filterAllTasks() {
+  toggleFilter(allFilterBtn);
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    allCkeckboxes[i].closest(".container__item").style.display = "flex";
+  }
+}
 
 clearBtn.addEventListener("click", clearCompleted);
 form.addEventListener("submit", addNewTask);
