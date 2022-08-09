@@ -26,22 +26,22 @@ function clearCompleted() {
 }
 
 // генерируем ID для чекбоксов
-function generateId() {
-  const id = Math.floor(Math.random() * 1000000);
-  return id;
-}
+// function generateId() {
+//   const id = Math.floor(Math.random() * 1000000);
+//   return id;
+// }
 
 // проверить уникальность случайно сгенерированного  ID
-function checkId(id, label, input) {
-  Array.from(document.querySelectorAll("input[id]")).forEach((i) => {
-    if (i.id != id) {
-      label.setAttribute("for", id);
-      input.setAttribute("id", id);
-    } else {
-      checkId(generateId(), label, input);
-    }
-  });
-}
+// function checkId(id, label, input) {
+//   Array.from(document.querySelectorAll("input[id]")).forEach((i) => {
+//     if (i.id != id) {
+//       label.setAttribute("for", id);
+//       input.setAttribute("id", id);
+//     } else {
+//       checkId(generateId(), label, input);
+//     }
+//   });
+// }
 
 // добавляем новую задачу
 function addNewTask(e) {
@@ -50,9 +50,11 @@ function addNewTask(e) {
   const text = newTask.querySelector(".checkbox__task");
   const label = newTask.querySelector(".checkbox");
   const input = newTask.querySelector(".checkbox__input_invisible");
-  checkId(generateId(), label, input);
+  const id = Date.now();
+  console.log(id);
   text.textContent = addTaskInput.value;
-
+  label.setAttribute("for", id);
+  input.setAttribute("id", id);
   // добавляем в список новую задачу
   taskList.append(newTask);
   addTaskInput.value = "";
@@ -158,16 +160,14 @@ function getActiveCount() {
 
 // счётчик выполненных задач
 function getCompletedCount() {
-  {
-    const checkedCheckboxes = document.querySelectorAll(
-      ".checkbox__input_invisible:checked"
-    );
-    let counter = 0;
-    for (let i = 0; i < checkedCheckboxes.length; i++) {
-      !checkedCheckboxes[i].checked ? counter : (counter += 1);
-    }
-    return counter;
+  const checkedCheckboxes = document.querySelectorAll(
+    ".checkbox__input_invisible:checked"
+  );
+  let counter = 0;
+  for (let i = 0; i < checkedCheckboxes.length; i++) {
+    !checkedCheckboxes[i].checked ? counter : (counter += 1);
   }
+  return counter;
 }
 
 // Добавить количество активных задач
