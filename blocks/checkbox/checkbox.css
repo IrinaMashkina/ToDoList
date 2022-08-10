@@ -38,7 +38,7 @@
 
 /* состояния видимого чекбокса */
 
-/* checked */
+
 .checkbox__input_invisible:checked + .checkbox__input_visible {
 }
 
@@ -56,6 +56,46 @@
   color: rgb(146, 146, 146);
   text-decoration-line:line-through;
 }
+
+/* .checked + .checkbox__input_visible::before {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  content: "\2714";
+  font-size: 22px;
+  color: #1b4d75;
+  border-radius: 50%;
+}
+.visible-checked {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  content: "\2714";
+  font-size: 22px;
+  color: #1b4d75;
+  border-radius: 50%;
+}
+
+.checked ~ .checkbox__task {
+  color: rgb(146, 146, 146);
+  text-decoration-line:line-through;
+}
+
+
+.checked  .checkbox__input_visible::before {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  content: "\2714";
+  font-size: 22px;
+  color: #1b4d75;
+  border-radius: 50%;
+}
+
+.checked  .checkbox__task {
+  color: rgb(146, 146, 146);
+  text-decoration-line:line-through;
+} */
 
 .none {
   display: none;

@@ -13,54 +13,94 @@ const activeFilterBtn = document.querySelector(
 const completedFilterBtn = document.querySelector(
   ".container__filter-button_type_completed"
 );
+let todos = [];
 
-// удалить все выполненные задачи
-function clearCompleted() {
-  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+//функция добавления в localStorage
+function addToLocalStorage(todos) {
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodos(todos);
+}
 
-  for (let i = 0; i < allCkeckboxes.length; i++) {
-    if (allCkeckboxes[i].checked) {
-      allCkeckboxes[i].closest(".container__item").remove();
-    }
+// получение элементов из localStorage
+function getFromLocalStorage() {
+  const reference = localStorage.getItem("todos");
+  if (reference) {
+    todos = JSON.parse(reference);
+    renderTodos(todos);
   }
 }
 
-// генерируем ID для чекбоксов
-// function generateId() {
-//   const id = Math.floor(Math.random() * 1000000);
-//   return id;
-// }
-
-// проверить уникальность случайно сгенерированного  ID
-// function checkId(id, label, input) {
-//   Array.from(document.querySelectorAll("input[id]")).forEach((i) => {
-//     if (i.id != id) {
-//       label.setAttribute("for", id);
-//       input.setAttribute("id", id);
-//     } else {
-//       checkId(generateId(), label, input);
-//     }
-//   });
-// }
-
-// добавляем новую задачу
-function addNewTask(e) {
-  e.preventDefault();
-  const newTask = task.cloneNode(true);
-  const text = newTask.querySelector(".checkbox__task");
-  const label = newTask.querySelector(".checkbox");
-  const input = newTask.querySelector(".checkbox__input_invisible");
-  const id = Date.now();
-  console.log(id);
-  text.textContent = addTaskInput.value;
-  label.setAttribute("for", id);
-  input.setAttribute("id", id);
-  // добавляем в список новую задачу
-  taskList.append(newTask);
+function renderTodos(todos) {
   addTaskInput.value = "";
+  taskList.innerHTML = "";
+  todos.forEach((item) => {
+    const checked = item.checked ? "checked" : null;
+    const newTask = task.cloneNode(true);
+    const text = newTask.querySelector(".checkbox__task");
+    const label = newTask.querySelector(".checkbox");
+    const input = newTask.querySelector(".checkbox__input_invisible");
+    text.textContent = item.text;
+    label.setAttribute("for", item.id);
+    input.setAttribute("id", item.id);
+    input.checked = checked;
+    taskList.append(newTask);
+  });
 
   // обновляем счетчик активных задач
   setCount();
+}
+
+// удалить все выполненные задачи
+function clearCompleted() {
+  //   const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+
+  //   for (let i = 0; i < allCkeckboxes.length; i++) {
+  //     if (allCkeckboxes[i].checked) {
+  //       allCkeckboxes[i].closest(".container__item").remove();
+  //     };
+
+  //     }
+  //   }
+  todos = todos.filter((item) => item.checked == false);
+  addToLocalStorage(todos);
+  filterAllTasks();
+}
+
+function addNewTask(e) {
+  e.preventDefault();
+  addTodo(addTaskInput.value);
+  addTaskInput.value = "";
+}
+
+// добавляем новую задачу
+function addTodo(item) {
+  const todo = {
+    id: Date.now(),
+    text: item,
+    checked: false,
+  };
+  todos.push(todo);
+  addToLocalStorage(todos);
+  addTaskInput.value = "";
+  // обновляем счетчик активных задач
+  setCount();
+}
+function toggleCheckbox(e) {
+  if (e.target.type === "checkbox") {
+    toggleChecked(e.target);
+  }
+}
+
+function toggleChecked(target) {
+  todos.forEach((item) => {
+    if (target.id == item.id) {
+      item.checked = !item.checked;
+      item.checked ? (target.checked = true) : (target.checked = false);
+      console.log(target.checked);
+      console.log(item.checked);
+    }
+  });
+  addToLocalStorage(todos);
 }
 
 // переключение кнопки (только одна из кнопок может быть активна)
@@ -177,6 +217,7 @@ function setCount() {
 }
 
 setCount();
+getFromLocalStorage();
 
 clearBtn.addEventListener("click", clearCompleted);
 form.addEventListener("submit", addNewTask);
@@ -184,3 +225,4 @@ activeFilterBtn.addEventListener("click", filterActivedTasks);
 completedFilterBtn.addEventListener("click", filterCompletedTasks);
 allFilterBtn.addEventListener("click", filterAllTasks);
 taskList.addEventListener("change", setCount);
+taskList.addEventListener("click", toggleCheckbox);
