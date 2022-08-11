@@ -48,22 +48,21 @@ function renderTodos(todos) {
 
   // обновляем счетчик активных задач
   setCount();
+  // toggleVisibleAndInvisibleText();
 }
 
 // удалить все выполненные задачи
 function clearCompleted() {
-  //   const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  // const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
 
-  //   for (let i = 0; i < allCkeckboxes.length; i++) {
-  //     if (allCkeckboxes[i].checked) {
-  //       allCkeckboxes[i].closest(".container__item").remove();
-  //     };
-
-  //     }
+  // for (let i = 0; i < allCkeckboxes.length; i++) {
+  //   if (allCkeckboxes[i].checked) {
+  //     allCkeckboxes[i].closest(".container__item").remove();
   //   }
+  // }
   todos = todos.filter((item) => item.checked == false);
   addToLocalStorage(todos);
-  filterAllTasks();
+  filterCompletedTasks();
 }
 
 function addNewTask(e) {
@@ -85,6 +84,7 @@ function addTodo(item) {
   // обновляем счетчик активных задач
   setCount();
 }
+
 function toggleCheckbox(e) {
   if (e.target.type === "checkbox") {
     toggleChecked(e.target);
@@ -96,8 +96,6 @@ function toggleChecked(target) {
     if (target.id == item.id) {
       item.checked = !item.checked;
       item.checked ? (target.checked = true) : (target.checked = false);
-      console.log(target.checked);
-      console.log(item.checked);
     }
   });
   addToLocalStorage(todos);
@@ -113,79 +111,71 @@ function toggleFilter(btn) {
 // показать только активные (невыполненные) задачи
 function filterActivedTasks() {
   const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
-  const containerInvisibleText = document.querySelector(
-    ".container__invisible-text"
-  );
-
   toggleFilter(activeFilterBtn);
 
   for (let i = 0; i < allCkeckboxes.length; i++) {
-    allCkeckboxes[i].closest(".container__item").style.display = "flex";
+    const item = allCkeckboxes[i].closest(".container__item");
+    showElement(item);
     if (allCkeckboxes[i].checked) {
-      allCkeckboxes[i].closest(".container__item").style.display = "none";
+      hideElement(item);
     }
   }
-
-  if (getActiveCount() === 0) {
-    visibleText("Нет активных задач");
-  } else {
-    containerInvisibleText.style.display = "none";
-  }
+  toggleVisibleAndInvisibleText(getActiveCount(), "Нет активных задач");
 }
 
 // показать только выполненные задачи
 function filterCompletedTasks() {
   const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
-  const containerInvisibleText = document.querySelector(
-    ".container__invisible-text"
-  );
-
   toggleFilter(completedFilterBtn);
-
   for (let i = 0; i < allCkeckboxes.length; i++) {
-    allCkeckboxes[i].closest(".container__item").style.display = "flex";
+    const item = allCkeckboxes[i].closest(".container__item");
+    showElement(item);
     if (!allCkeckboxes[i].checked) {
-      allCkeckboxes[i].closest(".container__item").style.display = "none";
+      hideElement(item);
     }
   }
 
-  if (getCompletedCount() === 0) {
-    visibleText("Нет выполненных задач");
-  } else {
-    containerInvisibleText.style.display = "none";
-  }
+  toggleVisibleAndInvisibleText(getCompletedCount(), "Нет выполненных задач");
 }
 
-// Показать все задачи
-function filterAllTasks() {
-  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+function toggleVisibleAndInvisibleText(counter, text) {
   const containerInvisibleText = document.querySelector(
     ".container__invisible-text"
   );
-  toggleFilter(allFilterBtn);
-
-  for (let i = 0; i < allCkeckboxes.length; i++) {
-    allCkeckboxes[i].closest(".container__item").style.display = "flex";
-  }
-  if (allCkeckboxes.length === 0) {
-    visibleText("Добавьте новые задачи");
+  if (counter === 0) {
+    visibleText(text);
   } else {
-    containerInvisibleText.style.display = "none";
+    hideElement(containerInvisibleText);
   }
 }
-
 // показать скрытый текст
 function visibleText(text) {
   const containerInvisibleText = document.querySelector(
     ".container__invisible-text"
   );
-  containerInvisibleText.style.display = "flex";
+  showElement(containerInvisibleText);
   containerInvisibleText.textContent = text;
+}
+
+// Показать все задачи
+function filterAllTasks() {
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  toggleFilter(allFilterBtn);
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    const item = allCkeckboxes[i].closest(".container__item");
+    showElement(item);
+  }
+  toggleVisibleAndInvisibleText(allCkeckboxes.length, "Добавьте новые задачи");
 }
 
 // скрыть элемент
 function hideElement(element) {
   element.style.display = "none";
+}
+
+// показать элемент
+function showElement(element) {
+  element.style.display = "flex";
 }
 
 // счётчик активных (невыполненных) задач
