@@ -3,7 +3,6 @@ const form = document.querySelector(".container__form");
 const addTaskInput = document.querySelector(".container__input");
 const taskList = document.querySelector(".container__list");
 const task = document.querySelector("#task").content.cloneNode(true);
-const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
 const allFilterBtn = document.querySelector(
   ".container__filter-button_type_all"
 );
@@ -49,7 +48,14 @@ function renderTodos(todos) {
     taskList.append(newTask);
   });
   setCount();
+  activedFilter();
 
+}
+
+function showTextForAddNewTask () {
+  const successfulText = document.querySelector(".container__successful-text");
+  showElement(successfulText);
+  setTimeout(() => hideElement(successfulText), 800)
 }
 
 // удалить все выполненные задачи
@@ -64,19 +70,18 @@ function addNewTask(e) {
   addTodo(addTaskInput.value);
   hideElement(containerInvisibleText);
   activedFilter();
+  showTextForAddNewTask();
   addTaskInput.value = "";
+
 }
 
 function activedFilter() {
   const nameClass = "container__filter-button_active";
   if (activeFilterBtn.classList.contains(nameClass)) {
     filterActivedTasks();
-    
   } else if (allFilterBtn.classList.contains(nameClass)) {
-    
     filterAllTasks();
   } else {
-    
     filterCompletedTasks();
   }
 }
@@ -95,8 +100,7 @@ function addTodo(item) {
   setCount();
 }
 
-
-// переключние чекбоксов 
+// переключние чекбоксов
 function toggleCheckbox(e) {
   if (e.target.type === "checkbox") {
     toggleChecked(e.target);
@@ -119,6 +123,17 @@ function toggleFilter(btn) {
   const activeBtn = document.querySelector(".container__filter-button_active");
   activeBtn.classList.remove("container__filter-button_active");
   btn.classList.add("container__filter-button_active");
+}
+
+// Показать все задачи
+function filterAllTasks() {
+  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
+  toggleFilter(allFilterBtn);
+  for (let i = 0; i < allCkeckboxes.length; i++) {
+    const item = allCkeckboxes[i].closest(".container__item");
+    showElement(item);
+  }
+  toggleVisibleAndInvisibleText(allCkeckboxes.length, "Добавьте новые задачи");
 }
 
 // показать только активные (невыполненные) задачи
@@ -147,10 +162,10 @@ function filterCompletedTasks() {
       hideElement(item);
     }
   }
-
   toggleVisibleAndInvisibleText(getCompletedCount(), "Нет выполненных задач");
 }
 
+// переключатель видимый/невидимый текст по счётчику задач
 function toggleVisibleAndInvisibleText(counter, text) {
   if (counter === 0) {
     visibleText(text);
@@ -158,21 +173,11 @@ function toggleVisibleAndInvisibleText(counter, text) {
     hideElement(containerInvisibleText);
   }
 }
+
 // показать скрытый текст
 function visibleText(text) {
   showElement(containerInvisibleText);
   containerInvisibleText.textContent = text;
-}
-
-// Показать все задачи
-function filterAllTasks() {
-  const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
-  toggleFilter(allFilterBtn);
-  for (let i = 0; i < allCkeckboxes.length; i++) {
-    const item = allCkeckboxes[i].closest(".container__item");
-    showElement(item);
-  }
-  toggleVisibleAndInvisibleText(allCkeckboxes.length, "Добавьте новые задачи");
 }
 
 // скрыть элемент
