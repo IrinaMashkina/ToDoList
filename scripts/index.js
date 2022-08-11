@@ -13,6 +13,9 @@ const activeFilterBtn = document.querySelector(
 const completedFilterBtn = document.querySelector(
   ".container__filter-button_type_completed"
 );
+const containerInvisibleText = document.querySelector(
+  ".container__invisible-text"
+);
 let todos = [];
 
 //функция добавления в localStorage
@@ -53,13 +56,6 @@ function renderTodos(todos) {
 
 // удалить все выполненные задачи
 function clearCompleted() {
-  // const allCkeckboxes = document.querySelectorAll(".checkbox__input_invisible");
-
-  // for (let i = 0; i < allCkeckboxes.length; i++) {
-  //   if (allCkeckboxes[i].checked) {
-  //     allCkeckboxes[i].closest(".container__item").remove();
-  //   }
-  // }
   todos = todos.filter((item) => item.checked == false);
   addToLocalStorage(todos);
   filterCompletedTasks();
@@ -68,7 +64,23 @@ function clearCompleted() {
 function addNewTask(e) {
   e.preventDefault();
   addTodo(addTaskInput.value);
+  hideElement(containerInvisibleText);
+  activedFilter();
   addTaskInput.value = "";
+}
+
+function activedFilter() {
+  const nameClass = "container__filter-button_active";
+  if (activeFilterBtn.classList.contains(nameClass)) {
+    filterActivedTasks();
+    console.log("активные задачи");
+  } else if (allFilterBtn.classList.contains(nameClass)) {
+    console.log("все задачи");
+    filterAllTasks();
+  } else {
+    console.log("выполненные задачи");
+    filterCompletedTasks();
+  }
 }
 
 // добавляем новую задачу
@@ -99,6 +111,7 @@ function toggleChecked(target) {
     }
   });
   addToLocalStorage(todos);
+  activedFilter();
 }
 
 // переключение кнопки (только одна из кнопок может быть активна)
@@ -139,9 +152,6 @@ function filterCompletedTasks() {
 }
 
 function toggleVisibleAndInvisibleText(counter, text) {
-  const containerInvisibleText = document.querySelector(
-    ".container__invisible-text"
-  );
   if (counter === 0) {
     visibleText(text);
   } else {
@@ -150,9 +160,6 @@ function toggleVisibleAndInvisibleText(counter, text) {
 }
 // показать скрытый текст
 function visibleText(text) {
-  const containerInvisibleText = document.querySelector(
-    ".container__invisible-text"
-  );
   showElement(containerInvisibleText);
   containerInvisibleText.textContent = text;
 }
