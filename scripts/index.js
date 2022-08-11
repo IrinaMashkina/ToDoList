@@ -48,17 +48,15 @@ function renderTodos(todos) {
     input.checked = checked;
     taskList.append(newTask);
   });
-
-  // обновляем счетчик активных задач
   setCount();
-  // toggleVisibleAndInvisibleText();
+
 }
 
 // удалить все выполненные задачи
 function clearCompleted() {
   todos = todos.filter((item) => item.checked == false);
   addToLocalStorage(todos);
-  filterCompletedTasks();
+  activedFilter();
 }
 
 function addNewTask(e) {
@@ -73,12 +71,12 @@ function activedFilter() {
   const nameClass = "container__filter-button_active";
   if (activeFilterBtn.classList.contains(nameClass)) {
     filterActivedTasks();
-    console.log("активные задачи");
+    
   } else if (allFilterBtn.classList.contains(nameClass)) {
-    console.log("все задачи");
+    
     filterAllTasks();
   } else {
-    console.log("выполненные задачи");
+    
     filterCompletedTasks();
   }
 }
@@ -97,6 +95,8 @@ function addTodo(item) {
   setCount();
 }
 
+
+// переключние чекбоксов 
 function toggleCheckbox(e) {
   if (e.target.type === "checkbox") {
     toggleChecked(e.target);
