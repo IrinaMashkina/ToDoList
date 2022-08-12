@@ -65,15 +65,7 @@ function clearCompleted() {
   activedFilter();
 }
 
-function addNewTask(e) {
-  e.preventDefault();
-  addTodo(addTaskInput.value);
-  hideElement(containerInvisibleText);
-  activedFilter();
-  showTextForAddNewTask();
-  addTaskInput.value = "";
 
-}
 
 function activedFilter() {
   const nameClass = "container__filter-button_active";
@@ -87,6 +79,16 @@ function activedFilter() {
 }
 
 // добавляем новую задачу
+function addNewTask(e) {
+  e.preventDefault();
+  addTodo(addTaskInput.value);
+  hideElement(containerInvisibleText);
+  activedFilter();
+  showTextForAddNewTask();
+  addTaskInput.value = "";
+
+}
+
 function addTodo(item) {
   const todo = {
     id: Date.now(),
